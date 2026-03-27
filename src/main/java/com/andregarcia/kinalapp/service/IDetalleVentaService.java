@@ -3,8 +3,6 @@ package com.andregarcia.kinalapp.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.http.ResponseEntity;
-
 import com.andregarcia.kinalapp.entity.DetalleVenta;
 
 public interface IDetalleVentaService {
