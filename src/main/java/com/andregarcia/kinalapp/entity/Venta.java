@@ -20,6 +20,7 @@ private int estado;
 @ManyToOne
 @JoinColumn (name = "clientes_dpi_usuario")
     private Cliente cliente;
+@ManyToOne
 @JoinColumn (name = "codigo_usuario")
     private Usuario usuario;
 
