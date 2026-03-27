@@ -19,28 +19,20 @@ private Double total;
 private int estado;
 @ManyToOne
 @JoinColumn (name = "clientes_dpi_usuario")
-    private String dpiCliente;
+    private Cliente cliente;
 @JoinColumn (name = "codigo_usuario")
-    private String codigoUsuario;
+    private Usuario usuario;
 
     public Venta() {
     }
 
-    public Venta(String codigoUsuario, int codigoVenta, String dpiCliente, int estado, Date fechaVenta, Double total) {
-        this.codigoUsuario = codigoUsuario;
+    public Venta(int codigoVenta, Date fechaVenta, Double total, int estado, Cliente cliente, Usuario usuario) {
         this.codigoVenta = codigoVenta;
-        this.dpiCliente = dpiCliente;
-        this.estado = estado;
         this.fechaVenta = fechaVenta;
         this.total = total;
-    }
-
-    public String getCodigoUsuario() {
-        return codigoUsuario;
-    }
-
-    public void setCodigoUsuario(String codigoUsuario) {
-        this.codigoUsuario = codigoUsuario;
+        this.estado = estado;
+        this.cliente = cliente;
+        this.usuario = usuario;
     }
 
     public int getCodigoVenta() {
@@ -49,22 +41,6 @@ private int estado;
 
     public void setCodigoVenta(int codigoVenta) {
         this.codigoVenta = codigoVenta;
-    }
-
-    public String getDpiCliente() {
-        return dpiCliente;
-    }
-
-    public void setDpiCliente(String dpiCliente) {
-        this.dpiCliente = dpiCliente;
-    }
-
-    public int getEstado() {
-        return estado;
-    }
-
-    public void setEstado(int estado) {
-        this.estado = estado;
     }
 
     public Date getFechaVenta() {
@@ -81,6 +57,30 @@ private int estado;
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
 
