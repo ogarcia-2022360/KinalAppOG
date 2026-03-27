@@ -21,4 +21,7 @@ public interface IDetalleVentaService {
 
     //Metodo para eliminar el datalle de una venta
     void eliminarDetalleVenta(Integer codigoDetalleVenta);
+
+    //Boolean - Retorna "true" si existe y "false" sin no existe
+    boolean existeCodigoDetalleVenta(Integer codigoDetalleVenta);
 }
