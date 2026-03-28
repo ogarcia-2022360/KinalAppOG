@@ -12,7 +12,7 @@ import com.andregarcia.kinalapp.service.IDetalleVentaService;
 
 @RestController
 //Las rutas en este controlador deben empezar por /codigoDetalleVenta
-@RequestMapping()
+@RequestMapping("/detalleVenta")
 public class DetalleVentaController<detalleVenta> {
     private final IDetalleVentaService detalleVentaService;
     public DetalleVentaController(IDetalleVentaService detalleVentaService){
