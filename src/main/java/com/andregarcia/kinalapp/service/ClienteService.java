@@ -1,13 +1,14 @@
 package com.andregarcia.kinalapp.service;
 
-import com.andregarcia.kinalapp.entity.Cliente;
-import com.andregarcia.kinalapp.repository.ClienteRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import com.andregarcia.kinalapp.entity.Cliente;
+import com.andregarcia.kinalapp.repository.ClienteRepository;
 
 /*
  * Anotacion que registra un Bean como un Bean de Spring
@@ -121,5 +122,4 @@ public class ClienteService implements IClienteService{
             new IllegalArgumentException("El apellido es un dato obligatorio.");
         }
     }
-
 }
