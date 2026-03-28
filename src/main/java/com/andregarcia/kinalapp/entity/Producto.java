@@ -5,20 +5,22 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 
-import javax.swing.*;
-
 @Entity
 @Table(name = "productos")
 public class Producto {
     @Id
     @Column(name = "codigo_producto")
     private Integer codigoProducto;
+
     @Column
     private String nombreProducto;
+
     @Column
     private Double precioProducto;
+
     @Column
     private Integer stockProducto;
+
     @Column
     private Integer estadoProducto;
 
