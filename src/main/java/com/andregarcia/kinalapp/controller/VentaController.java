@@ -20,7 +20,7 @@ public class VentaController {
 
     // Para peticiones GET
     @GetMapping
-    public ResponseEntity<List<Venta>> listar(){
+    public ResponseEntity<List<Venta>> listarVenta(){
         List<Venta> ventas = ventaService.listarVentas();
         return ResponseEntity.ok(ventas);
     }
@@ -34,7 +34,7 @@ public class VentaController {
     }
 
     @PostMapping
-    public ResponseEntity<?> guardar(@RequestBody Venta venta){
+    public ResponseEntity<?> guardarVenta(@RequestBody Venta venta){
         try{
             Venta nuevaVenta = ventaService.guardarVenta(venta);
             return new ResponseEntity<>(nuevaVenta, HttpStatus.CREATED);
@@ -45,7 +45,7 @@ public class VentaController {
 
     //Elimina una Venta
     @DeleteMapping("/{codigoVenta}")
-    public ResponseEntity<String> eliminar (@PathVariable int codigoVenta) {
+    public ResponseEntity<String> eliminarVenta(@PathVariable int codigoVenta) {
         try {
             if (!ventaService.existePorCodigoVenta(codigoVenta)) {
                 return ResponseEntity.notFound().build();
@@ -60,7 +60,7 @@ public class VentaController {
 
         //Actualizar la venta a traves del Codigo
         @PutMapping("/{codigoVenta}")
-        public ResponseEntity<?> actualizar(@PathVariable int codigoVenta, @RequestBody Venta venta){
+        public ResponseEntity<?> actualizarVenta(@PathVariable int codigoVenta, @RequestBody Venta venta){
             try {
                 if (!ventaService.existePorCodigoVenta(codigoVenta)) {
                     return ResponseEntity.notFound().build();
