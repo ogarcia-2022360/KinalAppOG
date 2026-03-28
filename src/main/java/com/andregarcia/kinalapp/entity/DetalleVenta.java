@@ -9,10 +9,13 @@ public class DetalleVenta {
     @Id
     @Column
     private Integer codigoDetalleVenta;
+
     @Column
     private Integer cantidadDetalleVenta;
+
     @Column
     private BigDecimal precioUnitario;
+
     @Column
     private BigDecimal subtotal;
 
