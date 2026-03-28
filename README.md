@@ -19,4 +19,4 @@ Con clases como: Clientes, Usuarios, Ventas, Productos, DetalleVenta.
 * **Hacer peticiones HTTP con la aplicacion de Postman**
 
 ## Direccion del Repositorio
-### https://github.com/ogarcia-2022360/KinalApp.git
+### https://github.com/ogarcia-2022360/KinalAppOG.git
