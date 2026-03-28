@@ -7,21 +7,23 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "clientes")
-
 public class Cliente {
+
     @Id
-    @Column (name = "dpi_cliente")
+    @Column(name = "dpi_cliente")
     private String dpiCliente;
+
     @Column
     private String nombreCliente;
+
     @Column
     private String apellidoCliente;
+
     @Column
     private String direccion;
+
     @Column
     private Integer estado;
-
-
 
     public Cliente() {
     }
