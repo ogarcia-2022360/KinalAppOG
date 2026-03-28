@@ -1,8 +1,10 @@
 package com.andregarcia.kinalapp.entity;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "ventas")
@@ -10,15 +12,15 @@ import java.util.Date;
 public class Venta {
 @Id
 @Column (name = "codigo_venta")
-private int codigoVenta;
-@Column
-private Date fechaVenta;
+private Integer codigoVenta;
+@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+private LocalDateTime fechaVenta;
 @Column
 private Double total;
 @Column
-private int estado;
+private Integer estado;
 @ManyToOne
-@JoinColumn (name = "clientes_dpi_usuario")
+@JoinColumn (name = "dpi_cliente")
     private Cliente cliente;
 @ManyToOne
 @JoinColumn (name = "codigo_usuario")
@@ -27,7 +29,7 @@ private int estado;
     public Venta() {
     }
 
-    public Venta(int codigoVenta, Date fechaVenta, Double total, int estado, Cliente cliente, Usuario usuario) {
+    public Venta(Integer codigoVenta, LocalDateTime fechaVenta, Double total, Integer estado, Cliente cliente, Usuario usuario) {
         this.codigoVenta = codigoVenta;
         this.fechaVenta = fechaVenta;
         this.total = total;
@@ -36,19 +38,19 @@ private int estado;
         this.usuario = usuario;
     }
 
-    public int getCodigoVenta() {
+    public Integer getCodigoVenta() {
         return codigoVenta;
     }
 
-    public void setCodigoVenta(int codigoVenta) {
+    public void setCodigoVenta(Integer codigoVenta) {
         this.codigoVenta = codigoVenta;
     }
 
-    public Date getFechaVenta() {
+    public LocalDateTime getFechaVenta() {
         return fechaVenta;
     }
 
-    public void setFechaVenta(Date fechaVenta) {
+    public void setFechaVenta(LocalDateTime fechaVenta) {
         this.fechaVenta = fechaVenta;
     }
 
@@ -60,11 +62,11 @@ private int estado;
         this.total = total;
     }
 
-    public int getEstado() {
+    public Integer getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(Integer estado) {
         this.estado = estado;
     }
 
