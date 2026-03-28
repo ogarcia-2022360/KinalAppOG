@@ -16,16 +16,16 @@ public class Producto {
     @Column
     private String nombreProducto;
     @Column
-    private double precioProducto;
+    private Double precioProducto;
     @Column
     private Integer stockProducto;
     @Column
-    private int estadoProducto;
+    private Integer estadoProducto;
 
     public Producto() {
     }
 
-    public Producto(Integer codigoProducto, String nombreProducto, double precioProducto, Integer stockProducto, int estadoProducto) {
+    public Producto(Integer codigoProducto, String nombreProducto, Double precioProducto, Integer stockProducto, Integer estadoProducto) {
         this.codigoProducto = codigoProducto;
         this.nombreProducto = nombreProducto;
         this.precioProducto = precioProducto;
@@ -49,11 +49,11 @@ public class Producto {
         this.nombreProducto = nombreProducto;
     }
 
-    public double getPrecioProducto() {
+    public Double getPrecioProducto() {
         return precioProducto;
     }
 
-    public void setPrecioProducto(double precioProducto) {
+    public void setPrecioProducto(Double precioProducto) {
         this.precioProducto = precioProducto;
     }
 
@@ -65,11 +65,11 @@ public class Producto {
         this.stockProducto = stockProducto;
     }
 
-    public int getEstadoProducto() {
+    public Integer getEstadoProducto() {
         return estadoProducto;
     }
 
-    public void setEstadoProducto(int estadoProducto) {
+    public void setEstadoProducto(Integer estadoProducto) {
         this.estadoProducto = estadoProducto;
     }
 }
