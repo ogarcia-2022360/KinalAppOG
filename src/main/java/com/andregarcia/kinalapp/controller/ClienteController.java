@@ -43,11 +43,6 @@ public class ClienteController<cliente> {
         .orElse(ResponseEntity.notFound().build());
     }
 
-    // Buscar por el estado del cliente
-    @GetMapping("/{estado}")
-    public ResponseEntity<Cliente> buscarPorActivos(@PathVariable int estado) {
-            return clienteService.buscarPorActivos(estado);
-    }
 
     @PostMapping
     public ResponseEntity<?> guardar(@RequestBody Cliente cliente){
