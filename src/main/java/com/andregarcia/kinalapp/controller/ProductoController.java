@@ -23,7 +23,7 @@ public class ProductoController<producto>{
         List<Producto> productos = productoService.listarProductos();
         return ResponseEntity.ok(productos);
     }
-    @GetMapping("/{codigProducto}")
+    @GetMapping("/{codigoProducto}")
     public ResponseEntity<Producto> buscarCodigoProducto(@PathVariable Integer codigoProducto){
         return productoService.buscarCodigoProducto(codigoProducto)
                 .map(ResponseEntity::ok)
