@@ -68,7 +68,7 @@ public class ClienteService implements IClienteService{
             // si no existe se lanza una exepcion (error controlado)
 
         }
-        cliente.setDPICliente(dpi);
+        cliente.setDpiCliente(dpi);
         // Asegurarnos que el dpi del objeto coincida con el de la URL
         //Por seguridad usamos el dpi de la URL y no el que viene en el JSON
         validarCliente(cliente);
@@ -107,7 +107,7 @@ public class ClienteService implements IClienteService{
          * Validaciones del negocio: Este metodo se hara privado porque
          * es algo interno del servicio
          */
-        if(cliente.getDPICliente() == null || cliente.getDPICliente().trim().isEmpty()){
+        if(cliente.getDpiCliente() == null || cliente.getDpiCliente().trim().isEmpty()){
             //si el DPI es null o esta vacio después de quitar espacios
             //lanza una execepcion con un mensaje
             throw new IllegalArgumentException("El DPI es un dato obligatorio.");
