@@ -13,14 +13,19 @@ public class Usuario {
     @Id
     @Column (name = "codigo_usuario")
     private Integer codigoUsuario;
+
     @Column
     private String username;
+
     @Column
     private String password;
+
     @Column
     private String email;
+
     @Column
     private String rol;
+
     @Column
     private Integer estado;
 
