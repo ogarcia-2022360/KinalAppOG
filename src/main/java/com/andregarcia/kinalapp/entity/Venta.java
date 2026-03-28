@@ -13,15 +13,20 @@ public class Venta {
 @Id
 @Column (name = "codigo_venta")
 private Integer codigoVenta;
+
 @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 private LocalDateTime fechaVenta;
+
 @Column
 private Double total;
+
 @Column
 private Integer estado;
+
 @ManyToOne
 @JoinColumn (name = "dpi_cliente")
-    private Cliente cliente;
+private Cliente cliente;
+
 @ManyToOne
 @JoinColumn (name = "codigo_usuario")
     private Usuario usuario;
