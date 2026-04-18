@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ventas</title>
+    <link rel="stylesheet" href="../css/styleCrud.css">
+</head>
+<body>
+    <main class="crud-container">
+        <img src="../img/venta.jpg" alt="Venta" class="crud-image">
+
+        <h1>Gestión de Ventas</h1>
+
+        <form id="ventaForm" class="crud-form">
+            <input type="hidden" id="codigo_venta">
+
+            <label>Fecha:</label>
+            <input type="date" id="fecha_venta" required>
+
+            <label>Total:</label>
+            <input type="number" step="0.01" id="total" required>
+
+            <label>Estado:</label>
+            <input type="number" id="estado">
+
+            <label>Cliente DPI:</label>
+            <input type="number" id="Clientes_dpi_cliente" required>
+
+            <label>Usuario Código:</label>
+            <input type="number" id="Usuarios_codigo_usuario" required>
+
+            <button type="submit" class="btn-crud">Guardar</button>
+        </form>
+
+        <table class="crud-table">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Cliente</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="ventasTable"></tbody>
+        </table>
+    </main>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="../css/styleCrud.css">
+</head>
+<body>
+    <main class="crud-container">
+        <img src="../img/usuario.jpg" alt="Usuario" class="crud-image">
+
+        <h1>Gestión de Usuarios</h1>
+
+        <form id="usuarioForm" class="crud-form">
+            <input type="hidden" id="codigo_usuario">
+
+            <label>Username:</label>
+            <input type="text" id="username" required>
+
+            <label>Password:</label>
+            <input type="password" id="password" required>
+
+            <label>Email:</label>
+            <input type="email" id="email" required>
+
+            <label>Rol:</label>
+            <input type="text" id="rol">
+
+            <label>Estado:</label>
+            <input type="number" id="estado">
+
+            <button type="submit" class="btn-crud">Guardar</button>
+        </form>
+
+        <table class="crud-table">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="usuariosTable"></tbody>
+        </table>
+    </main>
+</body>
+</html>

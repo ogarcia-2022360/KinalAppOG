@@ -1,1 +1,51 @@
 <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>DetalleVenta</title>
+    <link rel="stylesheet" href="../css/styleCrud.css">
+</head>
+<body>
+    <main class="crud-container">
+        <img src="../img/detalleventa.jpg" alt="DetalleVenta" class="crud-image">
+
+        <h1>Gestión de DetalleVenta</h1>
+
+        <form id="detalleForm" class="crud-form">
+            <input type="hidden" id="codigo_detalle_venta">
+
+            <label>Cantidad:</label>
+            <input type="number" id="cantidad" required>
+
+            <label>Precio Unitario:</label>
+            <input type="number" step="0.01" id="precio_unitario" required>
+
+            <label>Subtotal:</label>
+            <input type="number" step="0.01" id="subtotal" required>
+
+            <label>Producto Código:</label>
+            <input type="number" id="Productos_codigo_producto" required>
+
+            <label>Venta Código:</label>
+            <input type="number" id="Ventas_codigo_venta" required>
+
+            <button type="submit" class="btn-crud">Guardar</button>
+        </form>
+
+        <table class="crud-table">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                    <th>Producto</th>
+                    <th>Venta</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="detalleTable"></tbody>
+        </table>
+    </main>
+</body>
+</html>

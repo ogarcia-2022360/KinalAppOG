@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos</title>
+    <link rel="stylesheet" href="../css/styleCrud.css">
+</head>
+<body>
+    <main class="crud-container">
+        <img src="../img/producto.png" alt="Producto" class="crud-image">
+
+        <h1>Gestión de Productos</h1>
+
+        <form id="productoForm" class="crud-form">
+            <input type="hidden" id="codigo_producto">
+
+            <label>Nombre:</label>
+            <input type="text" id="nombre_producto" required>
+
+            <label>Precio:</label>
+            <input type="number" step="0.01" id="precio" required>
+
+            <label>Stock:</label>
+            <input type="number" id="stock" required>
+
+            <label>Estado:</label>
+            <input type="number" id="estado">
+
+            <button type="submit" class="btn-crud">Guardar</button>
+        </form>
+
+        <table class="crud-table">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="productosTable"></tbody>
+        </table>
+    </main>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes</title>
+    <link rel="stylesheet" href="../css/styleCrud.css">
+</head>
+<body>
+    <main class="crud-container">
+        <img src="../img/cliente.jpg" alt="Cliente" class="crud-image">
+
+        <h1>Gestión de Clientes</h1>
+
+        <form id="clienteForm" class="crud-form">
+            <input type="hidden" id="dpi_cliente">
+
+            <label>Nombre:</label>
+            <input type="text" id="nombre_cliente" required>
+
+            <label>Apellido:</label>
+            <input type="text" id="apellido_cliente" required>
+
+            <label>Dirección:</label>
+            <input type="text" id="direccion">
+
+            <label>Estado:</label>
+            <input type="number" id="estado">
+
+            <button type="submit" class="btn-crud">Guardar</button>
+        </form>
+
+        <table class="crud-table">
+            <thead>
+                <tr>
+                    <th>DPI</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Dirección</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="clientesTable"></tbody>
+        </table>
+    </main>
+</body>
+</html>
