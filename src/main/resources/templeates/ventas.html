@@ -12,10 +12,10 @@
         <h1>Gestión de Ventas</h1>
 
         <form id="ventaForm" class="crud-form">
-            <input type="hidden" id="codigo_venta">
+            <input type="hidden" id="codigoVenta">
 
             <label>Fecha:</label>
-            <input type="date" id="fecha_venta" required>
+            <input type="datetime-local" id="fechaVenta" required>
 
             <label>Total:</label>
             <input type="number" step="0.01" id="total" required>
@@ -24,10 +24,10 @@
             <input type="number" id="estado">
 
             <label>Cliente DPI:</label>
-            <input type="number" id="Clientes_dpi_cliente" required>
+            <input type="text" id="clienteDpi" required>
 
             <label>Usuario Código:</label>
-            <input type="number" id="Usuarios_codigo_usuario" required>
+            <input type="number" id="usuarioCodigo" required>
 
             <button type="submit" class="btn-crud">Guardar</button>
         </form>
@@ -46,6 +46,71 @@
             </thead>
             <tbody id="ventasTable"></tbody>
         </table>
+
+        <a href="entidades.html" class="menu-link">Volver al menú</a>
     </main>
+
+    <script>
+        async function cargarVentas() {
+            const res = await fetch("/ventas");
+            const data = await res.json();
+            const tbody = document.getElementById("ventasTable");
+            tbody.innerHTML = "";
+            data.forEach(v => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${v.codigoVenta}</td>
+                        <td>${v.fechaVenta}</td>
+                        <td>${v.total}</td>
+                        <td>${v.estado}</td>
+                        <td>${v.cliente ? v.cliente.dpiCliente : ""}</td>
+                        <td>${v.usuario ? v.usuario.codigoUsuario : ""}</td>
+                        <td>
+                            <button onclick="editarVenta(${v.codigoVenta})">Editar</button>
+                            <button onclick="eliminarVenta(${v.codigoVenta})">Eliminar</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        document.getElementById("ventaForm").addEventListener("submit", async e => {
+            e.preventDefault();
+            const venta = {
+                codigoVenta: document.getElementById("codigoVenta").value,
+                fechaVenta: document.getElementById("fechaVenta").value,
+                total: document.getElementById("total").value,
+                estado: document.getElementById("estado").value,
+                cliente: { dpiCliente: document.getElementById("clienteDpi").value },
+                usuario: { codigoUsuario: document.getElementById("usuarioCodigo").value }
+            };
+            const method = venta.codigoVenta ? "PUT" : "POST";
+            const url = venta.codigoVenta ? `/ventas/${venta.codigoVenta}` : "/ventas";
+            await fetch(url, {
+                method: method,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(venta)
+            });
+            cargarVentas();
+        });
+
+        async function eliminarVenta(id) {
+            await fetch(`/ventas/${id}`, { method: "DELETE" });
+            cargarVentas();
+        }
+
+        async function editarVenta(id) {
+            const res = await fetch(`/ventas/${id}`);
+            const v = await res.json();
+            document.getElementById("codigoVenta").value = v.codigoVenta;
+            document.getElementById("fechaVenta").value = v.fechaVenta ? v.fechaVenta.substring(0,16) : "";
+            document.getElementById("total").value = v.total;
+            document.getElementById("estado").value = v.estado;
+            document.getElementById("clienteDpi").value = v.cliente ? v.cliente.dpiCliente : "";
+            document.getElementById("usuarioCodigo").value = v.usuario ? v.usuario.codigoUsuario : "";
+        }
+
+        cargarVentas();
+    </script>
 </body>
 </html>

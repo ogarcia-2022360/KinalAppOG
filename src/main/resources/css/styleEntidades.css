@@ -24,30 +24,30 @@ body {
     border-radius: 12px;
     padding: 35px;
     text-align: center;
-    width: 220px; /* contenedor más grande */
+    width: 220px;
     box-shadow: 0 10px 14px #555555;
 }
 
 .entidad-img {
-    width: 70px; /* imagen más grande */
+    width: 70px;
     height: 70px;
     margin-bottom: 20px;
 }
 
 .entidad h2 {
-    font-size: 20px; /* letra más grande */
+    font-size: 20px;
     margin-bottom: 20px;
     color: #24292f;
 }
 
 .btn-entidad {
     display: inline-block;
-    padding: 15px 22px; /* botón más grande */
+    padding: 15px 22px;
     background-color: #2da44e;
     color: #ffffff;
     text-decoration: none;
     border-radius: 8px;
-    font-size: 17px; /* letra más grande */
+    font-size: 17px; 
     font-weight: 700;
     box-shadow: 0 8px 12px #444444;
     transition: background-color 0.2s, transform 0.1s;

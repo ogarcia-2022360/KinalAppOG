@@ -12,13 +12,13 @@
         <h1>Gestión de Clientes</h1>
 
         <form id="clienteForm" class="crud-form">
-            <input type="hidden" id="dpi_cliente">
+            <input type="hidden" id="dpiCliente">
 
             <label>Nombre:</label>
-            <input type="text" id="nombre_cliente" required>
+            <input type="text" id="nombreCliente" required>
 
             <label>Apellido:</label>
-            <input type="text" id="apellido_cliente" required>
+            <input type="text" id="apellidoCliente" required>
 
             <label>Dirección:</label>
             <input type="text" id="direccion">
@@ -42,6 +42,68 @@
             </thead>
             <tbody id="clientesTable"></tbody>
         </table>
+
+        <a href="entidades.html" class="menu-link">Volver al menú</a>
     </main>
+
+    <script>
+        async function cargarClientes() {
+            const res = await fetch("/clientes");
+            const data = await res.json();
+            const tbody = document.getElementById("clientesTable");
+            tbody.innerHTML = "";
+            data.forEach(c => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${c.dpiCliente}</td>
+                        <td>${c.nombreCliente}</td>
+                        <td>${c.apellidoCliente}</td>
+                        <td>${c.direccion}</td>
+                        <td>${c.estado}</td>
+                        <td>
+                            <button onclick="editarCliente('${c.dpiCliente}')">Editar</button>
+                            <button onclick="eliminarCliente('${c.dpiCliente}')">Eliminar</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        document.getElementById("clienteForm").addEventListener("submit", async e => {
+            e.preventDefault();
+            const cliente = {
+                dpiCliente: document.getElementById("dpiCliente").value,
+                nombreCliente: document.getElementById("nombreCliente").value,
+                apellidoCliente: document.getElementById("apellidoCliente").value,
+                direccion: document.getElementById("direccion").value,
+                estado: document.getElementById("estado").value
+            };
+            const method = cliente.dpiCliente ? "PUT" : "POST";
+            const url = cliente.dpiCliente ? `/clientes/${cliente.dpiCliente}` : "/clientes";
+            await fetch(url, {
+                method: method,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(cliente)
+            });
+            cargarClientes();
+        });
+
+        async function eliminarCliente(dpi) {
+            await fetch(`/clientes/${dpi}`, { method: "DELETE" });
+            cargarClientes();
+        }
+
+        async function editarCliente(dpi) {
+            const res = await fetch(`/clientes/${dpi}`);
+            const c = await res.json();
+            document.getElementById("dpiCliente").value = c.dpiCliente;
+            document.getElementById("nombreCliente").value = c.nombreCliente;
+            document.getElementById("apellidoCliente").value = c.apellidoCliente;
+            document.getElementById("direccion").value = c.direccion;
+            document.getElementById("estado").value = c.estado;
+        }
+
+        cargarClientes();
+    </script>
 </body>
 </html>

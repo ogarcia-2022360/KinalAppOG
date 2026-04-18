@@ -12,19 +12,19 @@
         <h1>Gestión de Productos</h1>
 
         <form id="productoForm" class="crud-form">
-            <input type="hidden" id="codigo_producto">
+            <input type="hidden" id="codigoProducto">
 
             <label>Nombre:</label>
-            <input type="text" id="nombre_producto" required>
+            <input type="text" id="nombreProducto" required>
 
             <label>Precio:</label>
-            <input type="number" step="0.01" id="precio" required>
+            <input type="number" step="0.01" id="precioProducto" required>
 
             <label>Stock:</label>
-            <input type="number" id="stock" required>
+            <input type="number" id="stockProducto" required>
 
             <label>Estado:</label>
-            <input type="number" id="estado">
+            <input type="number" id="estadoProducto">
 
             <button type="submit" class="btn-crud">Guardar</button>
         </form>
@@ -42,6 +42,68 @@
             </thead>
             <tbody id="productosTable"></tbody>
         </table>
+
+        <a href="entidades.html" class="menu-link">Volver al menú</a>
     </main>
+
+    <script>
+        async function cargarProductos() {
+            const res = await fetch("/productos");
+            const data = await res.json();
+            const tbody = document.getElementById("productosTable");
+            tbody.innerHTML = "";
+            data.forEach(p => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${p.codigoProducto}</td>
+                        <td>${p.nombreProducto}</td>
+                        <td>${p.precioProducto}</td>
+                        <td>${p.stockProducto}</td>
+                        <td>${p.estadoProducto}</td>
+                        <td>
+                            <button onclick="editarProducto(${p.codigoProducto})">Editar</button>
+                            <button onclick="eliminarProducto(${p.codigoProducto})">Eliminar</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        document.getElementById("productoForm").addEventListener("submit", async e => {
+            e.preventDefault();
+            const producto = {
+                codigoProducto: document.getElementById("codigoProducto").value,
+                nombreProducto: document.getElementById("nombreProducto").value,
+                precioProducto: document.getElementById("precioProducto").value,
+                stockProducto: document.getElementById("stockProducto").value,
+                estadoProducto: document.getElementById("estadoProducto").value
+            };
+            const method = producto.codigoProducto ? "PUT" : "POST";
+            const url = producto.codigoProducto ? `/productos/${producto.codigoProducto}` : "/productos";
+            await fetch(url, {
+                method: method,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(producto)
+            });
+            cargarProductos();
+        });
+
+        async function eliminarProducto(id) {
+            await fetch(`/productos/${id}`, { method: "DELETE" });
+            cargarProductos();
+        }
+
+        async function editarProducto(id) {
+            const res = await fetch(`/productos/${id}`);
+            const p = await res.json();
+            document.getElementById("codigoProducto").value = p.codigoProducto;
+            document.getElementById("nombreProducto").value = p.nombreProducto;
+            document.getElementById("precioProducto").value = p.precioProducto;
+            document.getElementById("stockProducto").value = p.stockProducto;
+            document.getElementById("estadoProducto").value = p.estadoProducto;
+        }
+
+        cargarProductos();
+    </script>
 </body>
 </html>
