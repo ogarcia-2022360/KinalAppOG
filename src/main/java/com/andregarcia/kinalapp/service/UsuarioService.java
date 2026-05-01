@@ -2,6 +2,7 @@ package com.andregarcia.kinalapp.service;
 
 import java.util.List;
 import java.util.Optional;
+import com.andregarcia.kinalapp.repository.UsuarioRepository;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
