@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="../css/styleLogin.css">
+    <title>Login - KinalApp</title>
+    <link rel="stylesheet" th:href="@{/css/styleLogin.css}">
 </head>
 <body>
+<main class="form-container">
+    <img th:src="@{/img/logoKinal.png}" alt="Logo Kinal" class="form-image">
 
-    <main class="form-container">
-        
-        <img src="../img/logoKinal.png" alt="Logo Kinal" class="form-image">
+    <h1>Inicia sesión</h1>
+    <p>Kinal Management System</p>
 
-        <h1>Inicia sesión</h1>
-        <h1>OG</h1>
+    <form th:action="@{/login}" method="post">
+        <input type="text" name="username" placeholder="Usuario" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <button type="submit">Entrar</button>
+    </form>
 
-        <form action="/login" method="post">
-            <input type="text" name="username" placeholder="Usuario" required>
-            <input type="password" name="password" placeholder="Contraseña" required>
-            <button type="submit">Ingresar</button>
-        </form>
-
-    </main>
-
+    <div th:if="${param.error}" style="color: red;">
+        Usuario o contraseña incorrectos.
+    </div>
+</main>
 </body>
 </html>
