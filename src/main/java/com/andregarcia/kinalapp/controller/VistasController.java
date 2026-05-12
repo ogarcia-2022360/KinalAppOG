@@ -11,6 +11,11 @@ public class VistasController {
         return "entidades";
     }
 
+    @GetMapping("/detalleVentasVista")
+    public String detalleVentas() {
+        return "detalleVentas";
+    }
+
     @GetMapping("/clientesVista")
     public String clientes() {
         return "clientes";

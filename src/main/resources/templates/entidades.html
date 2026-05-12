@@ -13,38 +13,38 @@
     <div class="entidad">
         <img th:src="@{/img/cliente.jpg}" alt="Cliente" class="entidad-img">
         <h2>Cliente</h2>
-        <a th:href="@{/clientes}" class="btn-entidad">Ingresar</a>
+        <a th:href="@{/clientesVista}" class="btn-entidad">Ingresar</a>
     </div>
 
     <div class="entidad">
         <img th:src="@{/img/detalleVenta.jpg}" alt="DetalleVenta" class="entidad-img">
         <h2>DetalleVenta</h2>
-        <a th:href="@{/detalleventas}" class="btn-entidad">Ingresar</a>
+        <a th:href="@{/detalleVentasVista}" class="btn-entidad">Ingresar</a>
     </div>
 
     <div class="entidad">
         <img th:src="@{/img/producto.png}" alt="Producto" class="entidad-img">
         <h2>Producto</h2>
-        <a th:href="@{/productos}" class="btn-entidad">Ingresar</a>
+        <a th:href="@{/productosVista}" class="btn-entidad">Ingresar</a>
     </div>
 
     <div class="entidad">
         <img th:src="@{/img/usuario.jpg}" alt="Usuario" class="entidad-img">
         <h2>Usuario</h2>
-        <a th:href="@{/usuarios}" class="btn-entidad">Ingresar</a>
+        <a th:href="@{/usuariosVista}" class="btn-entidad">Ingresar</a>
     </div>
 
     <div class="entidad">
         <img th:src="@{/img/venta.jpg}" alt="Venta" class="entidad-img">
         <h2>Venta</h2>
-        <a th:href="@{/ventas}" class="btn-entidad">Ingresar</a>
+        <a th:href="@{/ventasVista}" class="btn-entidad">Ingresar</a>
     </div>
 
 </main>
 
 <div style="text-align: center; margin-top: 20px;">
     <form th:action="@{/logout}" method="post">
-        <button type="submit" style="background-color: #d9534f; color: white; border: none; padding: 10px 20px; cursor: pointer;">
+        <button type="submit" style="background-color: #d9534f; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">
             Cerrar Sesión
         </button>
     </form>

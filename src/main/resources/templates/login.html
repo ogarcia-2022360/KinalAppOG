@@ -14,12 +14,21 @@
     <p>Kinal Management System</p>
 
     <form th:action="@{/login}" method="post">
-        <input type="text" name="username" placeholder="Usuario" required>
-        <input type="password" name="password" placeholder="Contraseña" required>
-        <button type="submit">Entrar</button>
+        
+        <div class="input-group">
+            <label>Usuario</label>
+            <input type="text" name="username" placeholder="Ingresa tu usuario" required autocomplete="username">
+        </div>
+
+        <div class="input-group">
+            <label>Contraseña</label>
+            <input type="password" name="password" placeholder="Ingresa tu contraseña" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="btn-ingresar">Entrar</button>
     </form>
 
-    <div th:if="${param.error}" style="color: red;">
+    <div th:if="${param.error}" style="color: red; margin-top: 15px;">
         Usuario o contraseña incorrectos.
     </div>
 </main>
