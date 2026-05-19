@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="../css/styleCrud.css">
+</head>
+<body>
+    <main class="crud-container">
+        <img src="../img/usuario.jpg" alt="Usuario" class="crud-image">
+
+        <h1>Gestión de Usuarios</h1>
+
+        <form id="usuarioForm" class="crud-form">
+            <input type="hidden" id="codigo_usuario">
+
+            <label>Username:</label>
+            <input type="text" id="username" required>
+
+            <label>Password:</label>
+            <input type="password" id="password" required>
+
+            <label>Email:</label>
+            <input type="email" id="email" required>
+
+            <label>Rol:</label>
+            <input type="text" id="rol">
+
+            <label>Estado:</label>
+            <input type="number" id="estado">
+
+            <button type="submit" class="btn-crud">Guardar</button>
+        </form>
+
+        <table class="crud-table">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="usuariosTable"></tbody>
+        </table>
+
+        <a href="entidades.html" class="menu-link">Volver al menú</a>
+    </main>
+
+    <script>
+        async function cargarUsuarios() {
+            const res = await fetch("/usuarios");
+            const data = await res.json();
+            const tbody = document.getElementById("usuariosTable");
+            tbody.innerHTML = "";
+            data.forEach(u => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${u.codigoUsuario}</td>
+                        <td>${u.username}</td>
+                        <td>${u.email}</td>
+                        <td>${u.rol}</td>
+                        <td>${u.estado}</td>
+                        <td>
+                            <button onclick="editarUsuario('${u.codigoUsuario}')">Editar</button>
+                            <button onclick="eliminarUsuario('${u.codigoUsuario}')">Eliminar</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        document.getElementById("usuarioForm").addEventListener("submit", async e => {
+            e.preventDefault();
+            const usuario = {
+                codigoUsuario: document.getElementById("codigo_usuario").value,
+                username: document.getElementById("username").value,
+                password: document.getElementById("password").value,
+                email: document.getElementById("email").value,
+                rol: document.getElementById("rol").value,
+                estado: document.getElementById("estado").value
+            };
+            const method = usuario.codigoUsuario ? "PUT" : "POST";
+            const url = usuario.codigoUsuario ? `/usuarios/${usuario.codigoUsuario}` : "/usuarios";
+            await fetch(url, {
+                method: method,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(usuario)
+            });
+            cargarUsuarios();
+        });
+
+        async function eliminarUsuario(id) {
+            await fetch(`/usuarios/${id}`, { method: "DELETE" });
+            cargarUsuarios();
+        }
+
+        async function editarUsuario(id) {
+            const res = await fetch(`/usuarios/${id}`);
+            const u = await res.json();
+            document.getElementById("codigo_usuario").value = u.codigoUsuario;
+            document.getElementById("username").value = u.username;
+            document.getElementById("password").value = u.password;
+            document.getElementById("email").value = u.email;
+            document.getElementById("rol").value = u.rol;
+            document.getElementById("estado").value = u.estado;
+        }
+
+        cargarUsuarios();
+    </script>
+</body>
+</html>

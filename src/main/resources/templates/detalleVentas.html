@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>DetalleVenta</title>
+    <link rel="stylesheet" href="../css/styleCrud.css">
+</head>
+<body>
+    <main class="crud-container">
+        <img src="../img/detalleventa.jpg" alt="DetalleVenta" class="crud-image">
+
+        <h1>Gestión de DetalleVenta</h1>
+
+        <form id="detalleForm" class="crud-form">
+            <input type="hidden" id="codigoDetalleVenta">
+
+            <label>Cantidad:</label>
+            <input type="number" id="cantidadDetalleVenta" required>
+
+            <label>Precio Unitario:</label>
+            <input type="number" step="0.01" id="precioUnitario" required>
+
+            <label>Subtotal:</label>
+            <input type="number" step="0.01" id="subtotal" required>
+
+            <label>Producto Código:</label>
+            <input type="number" id="productoCodigo" required>
+
+            <label>Venta Código:</label>
+            <input type="number" id="ventaCodigo" required>
+
+            <button type="submit" class="btn-crud">Guardar</button>
+        </form>
+
+        <table class="crud-table">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                    <th>Producto</th>
+                    <th>Venta</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="detalleTable"></tbody>
+        </table>
+
+        <a href="entidades.html" class="menu-link">Volver al menú</a>
+    </main>
+
+    <script>
+        async function cargarDetalleVenta() {
+            const res = await fetch("/detalleVenta");
+            const data = await res.json();
+            const tbody = document.getElementById("detalleTable");
+            tbody.innerHTML = "";
+            data.forEach(d => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${d.codigoDetalleVenta}</td>
+                        <td>${d.cantidadDetalleVenta}</td>
+                        <td>${d.precioUnitario}</td>
+                        <td>${d.subtotal}</td>
+                        <td>${d.producto ? d.producto.codigoProducto : ""}</td>
+                        <td>${d.venta ? d.venta.codigoVenta : ""}</td>
+                        <td>
+                            <button onclick="editarDetalle(${d.codigoDetalleVenta})">Editar</button>
+                            <button onclick="eliminarDetalle(${d.codigoDetalleVenta})">Eliminar</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        document.getElementById("detalleForm").addEventListener("submit", async e => {
+            e.preventDefault();
+            const detalle = {
+                codigoDetalleVenta: document.getElementById("codigoDetalleVenta").value,
+                cantidadDetalleVenta: document.getElementById("cantidadDetalleVenta").value,
+                precioUnitario: document.getElementById("precioUnitario").value,
+                subtotal: document.getElementById("subtotal").value,
+                producto: { codigoProducto: document.getElementById("productoCodigo").value },
+                venta: { codigoVenta: document.getElementById("ventaCodigo").value }
+            };
+            const method = detalle.codigoDetalleVenta ? "PUT" : "POST";
+            const url = detalle.codigoDetalleVenta ? `/detalleVenta/${detalle.codigoDetalleVenta}` : "/detalleVenta";
+            await fetch(url, {
+                method: method,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(detalle)
+            });
+            cargarDetalleVenta();
+        });
+
+        async function eliminarDetalle(id) {
+            await fetch(`/detalleVenta/${id}`, { method: "DELETE" });
+            cargarDetalleVenta();
+        }
+
+        async function editarDetalle(id) {
+            const res = await fetch(`/detalleVenta/${id}`);
+            const d = await res.json();
+            document.getElementById("codigoDetalleVenta").value = d.codigoDetalleVenta;
+            document.getElementById("cantidadDetalleVenta").value = d.cantidadDetalleVenta;
+            document.getElementById("precioUnitario").value = d.precioUnitario;
+            document.getElementById("subtotal").value = d.subtotal;
+            document.getElementById("productoCodigo").value = d.producto ? d.producto.codigoProducto : "";
+            document.getElementById("ventaCodigo").value = d.venta ? d.venta.codigoVenta : "";
+        }
+
+        cargarDetalleVenta();
+    </script>
+</body>
+</html>

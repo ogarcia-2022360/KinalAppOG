@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes</title>
+    <link rel="stylesheet" href="../css/styleCrud.css">
+</head>
+<body>
+    <main class="crud-container">
+        <img src="../img/cliente.jpg" alt="Cliente" class="crud-image">
+
+        <h1>Gestión de Clientes</h1>
+
+        <form id="clienteForm" class="crud-form">
+            <input type="hidden" id="dpiCliente">
+
+            <label>Nombre:</label>
+            <input type="text" id="nombreCliente" required>
+
+            <label>Apellido:</label>
+            <input type="text" id="apellidoCliente" required>
+
+            <label>Dirección:</label>
+            <input type="text" id="direccion">
+
+            <label>Estado:</label>
+            <input type="number" id="estado">
+
+            <button type="submit" class="btn-crud">Guardar</button>
+        </form>
+
+        <table class="crud-table">
+            <thead>
+                <tr>
+                    <th>DPI</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Dirección</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="clientesTable"></tbody>
+        </table>
+
+        <a href="entidades.html" class="menu-link">Volver al menú</a>
+    </main>
+
+    <script>
+        async function cargarClientes() {
+            const res = await fetch("/clientes");
+            const data = await res.json();
+            const tbody = document.getElementById("clientesTable");
+            tbody.innerHTML = "";
+            data.forEach(c => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${c.dpiCliente}</td>
+                        <td>${c.nombreCliente}</td>
+                        <td>${c.apellidoCliente}</td>
+                        <td>${c.direccion}</td>
+                        <td>${c.estado}</td>
+                        <td>
+                            <button onclick="editarCliente('${c.dpiCliente}')">Editar</button>
+                            <button onclick="eliminarCliente('${c.dpiCliente}')">Eliminar</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        document.getElementById("clienteForm").addEventListener("submit", async e => {
+            e.preventDefault();
+            const cliente = {
+                dpiCliente: document.getElementById("dpiCliente").value,
+                nombreCliente: document.getElementById("nombreCliente").value,
+                apellidoCliente: document.getElementById("apellidoCliente").value,
+                direccion: document.getElementById("direccion").value,
+                estado: document.getElementById("estado").value
+            };
+            const method = cliente.dpiCliente ? "PUT" : "POST";
+            const url = cliente.dpiCliente ? `/clientes/${cliente.dpiCliente}` : "/clientes";
+            await fetch(url, {
+                method: method,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(cliente)
+            });
+            cargarClientes();
+        });
+
+        async function eliminarCliente(dpi) {
+            await fetch(`/clientes/${dpi}`, { method: "DELETE" });
+            cargarClientes();
+        }
+
+        async function editarCliente(dpi) {
+            const res = await fetch(`/clientes/${dpi}`);
+            const c = await res.json();
+            document.getElementById("dpiCliente").value = c.dpiCliente;
+            document.getElementById("nombreCliente").value = c.nombreCliente;
+            document.getElementById("apellidoCliente").value = c.apellidoCliente;
+            document.getElementById("direccion").value = c.direccion;
+            document.getElementById("estado").value = c.estado;
+        }
+
+        cargarClientes();
+    </script>
+</body>
+</html>

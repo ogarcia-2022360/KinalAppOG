@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entidades - KinalApp</title>
+    <link rel="stylesheet" th:href="@{/css/styleEntidades.css}">
+</head>
+<body>
+
+<main class="entidades-container">
+
+    <div class="entidad">
+        <img th:src="@{/img/cliente.jpg}" alt="Cliente" class="entidad-img">
+        <h2>Cliente</h2>
+        <a th:href="@{/clientesVista}" class="btn-entidad">Ingresar</a>
+    </div>
+
+    <div class="entidad">
+        <img th:src="@{/img/detalleVenta.jpg}" alt="DetalleVenta" class="entidad-img">
+        <h2>DetalleVenta</h2>
+        <a th:href="@{/detalleVentasVista}" class="btn-entidad">Ingresar</a>
+    </div>
+
+    <div class="entidad">
+        <img th:src="@{/img/producto.png}" alt="Producto" class="entidad-img">
+        <h2>Producto</h2>
+        <a th:href="@{/productosVista}" class="btn-entidad">Ingresar</a>
+    </div>
+
+    <div class="entidad">
+        <img th:src="@{/img/usuario.jpg}" alt="Usuario" class="entidad-img">
+        <h2>Usuario</h2>
+        <a th:href="@{/usuariosVista}" class="btn-entidad">Ingresar</a>
+    </div>
+
+    <div class="entidad">
+        <img th:src="@{/img/venta.jpg}" alt="Venta" class="entidad-img">
+        <h2>Venta</h2>
+        <a th:href="@{/ventasVista}" class="btn-entidad">Ingresar</a>
+    </div>
+
+</main>
+
+<div style="text-align: center; margin-top: 20px;">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" style="background-color: #d9534f; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">
+            Cerrar Sesión
+        </button>
+    </form>
+</div>
+
+</body>
+</html>
